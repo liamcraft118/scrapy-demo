@@ -1,0 +1,25 @@
+{
+    "version": "0.1.0",
+    "configurations": [
+        {
+            "name": "Python: Scrapy",
+            "type": "python",
+            "request": "launch",
+            "program": ".venv/bin/scrapy",
+            "args": [
+                "crawl",
+                "stardew_valley_wiki"
+            ],
+            // "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "env": {},
+            "stopOnEntry": false,
+            // "python": ".venv/bin/python",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        }
+    ]
+}
