@@ -6,8 +6,14 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from stardew_valley.database import Database
 
 
 class StardewValleyPipeline:
     def process_item(self, item, spider):
+        return item
+
+class DatabasePipeline:
+    def process_item(self, item ,spider):
+        Database().save_collection(item)
         return item
