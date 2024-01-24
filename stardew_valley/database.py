@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, Column, String, Text, Integer, ForeignKey, MetaData, Table
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
+from stardew_valley.items import CollectionsItem
 
 Base = declarative_base()
 mysql_url = 'mysql://root:password@localhost:3306/mydatabase'
@@ -45,3 +46,14 @@ class Database:
         session.close()
         return has_data
     
+    def get_collections(self):
+        session = self.Session()
+        domains = session.query(CollectionDomain)
+        items = []
+        for domain in domains:
+            item = CollectionsItem()
+            item["zh_name"] = domain.zh_name
+            item["en_name"] = domain.en_name
+            item["link"] = domain.link
+            items.append(item)
+        return items

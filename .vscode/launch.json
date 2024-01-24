@@ -8,7 +8,7 @@
             "program": ".venv/bin/scrapy",
             "args": [
                 "crawl",
-                "stardew_valley_wiki"
+                "collection_spider"
             ],
             // "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
