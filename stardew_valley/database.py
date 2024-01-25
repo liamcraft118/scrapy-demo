@@ -1,17 +1,9 @@
-from sqlalchemy import create_engine, Column, String, Text, Integer, ForeignKey, MetaData, Table
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from stardew_valley.items import CollectionsItem
 
 Base = declarative_base()
 mysql_url = 'mysql://root:password@localhost:3306/mydatabase'
-
-class CollectionDomain(Base):
-    __tablename__ = 'collection'
-    id = Column(Integer, primary_key=True)
-    zh_name = Column(String(100))
-    en_name = Column(String(50))
-    link = Column(String(100))
 
 class Database:
     _instance = None
@@ -29,31 +21,13 @@ class Database:
     def remove_all_tables(self):
         Base.metadata.drop_all(self.engine)
 
-    def save_collection(self, item):
-        domain = CollectionDomain()
-        domain.zh_name = item["zh_name"]
-        domain.en_name = item["en_name"]
-        domain.link = item["link"]
-
+    def create(self, domain):
         session = self.Session()
         session.add(domain)
         session.commit()
         session.close()
 
-    def check_collections_exist(self):
+    def query(self, domain_class):
         session = self.Session()
-        has_data = session.query(CollectionDomain).first() is not None
-        session.close()
-        return has_data
-    
-    def get_collections(self):
-        session = self.Session()
-        domains = session.query(CollectionDomain)
-        items = []
-        for domain in domains:
-            item = CollectionsItem()
-            item["zh_name"] = domain.zh_name
-            item["en_name"] = domain.en_name
-            item["link"] = domain.link
-            items.append(item)
-        return items
+        domains = session.query(domain_class)
+        return domains

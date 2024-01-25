@@ -6,7 +6,8 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-from stardew_valley.database import Database
+from stardew_valley.dao.collection_dao import CollectionDao
+from stardew_valley.models import CollectionDomain
 
 
 class StardewValleyPipeline:
@@ -15,5 +16,6 @@ class StardewValleyPipeline:
 
 class DatabasePipeline:
     def process_item(self, item ,spider):
-        Database().save_collection(item)
+        if item is CollectionDomain:
+            CollectionDao().save_collection(item)
         return item

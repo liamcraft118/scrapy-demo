@@ -1,7 +1,7 @@
 import scrapy
 import os
-from scrapy.http import HtmlResponse
-# from stardew_valley.items import CollectionsItem
+from stardew_valley.items import CollectionDetailItem
+from stardew_valley.dao.collection_dao import CollectionDao
 from stardew_valley.database import Database
 
 class CollectionSpider(scrapy.Spider):
@@ -18,19 +18,17 @@ class CollectionSpider(scrapy.Spider):
 
     def start_requests(self):
         downloaded_files = self._get_downloaded_htmls()
-        items = Database().get_collections()
+        items = CollectionDao().get_collections()
         result_items = [item for item in items if item['zh_name'] not in downloaded_files]
 
         if (len(result_items) == 0):
             print("all collection is downloaded")
-            for file_name in downloaded_files:
+            for file_name in downloaded_files[0:2]:
                 file_url = f"file://{self.resource_path}/{file_name}"
                 yield scrapy.Request(url=file_url, callback=self.parse)
         else:
             for item in result_items:
-                zh_name = item["zh_name"]
                 link = f"{self.host}{item['link']}"
-                print(f"start {zh_name}")
                 yield scrapy.Request(url=link, callback=self.download_htmls, meta={"item": item})
 
     # parse collection html

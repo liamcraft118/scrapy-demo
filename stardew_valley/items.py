@@ -15,3 +15,19 @@ class CollectionsItem(scrapy.Item):
     en_name = scrapy.Field()
     zh_name = scrapy.Field()
     link = scrapy.Field()
+
+class CollectionDetailItem(scrapy.Item):
+    growth_time = scrapy.Field()
+
+class VilltagerItem(scrapy.Item):
+    name = scrapy.Field()
+    zh_name = scrapy.Field()
+    icon_link = scrapy.Field()
+
+class BundleItem(scrapy.Item):
+    name = scrapy.Field()
+    zh_name = scrapy.Field()
+    collection_name = scrapy.Field()
+    
+
+    
