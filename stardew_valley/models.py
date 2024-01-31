@@ -1,23 +1,18 @@
 from sqlalchemy import Column, String, Integer, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
-from enum import Enum as PythonEnum
 from stardew_valley.database import Base
+from stardew_valley.utils.defines import ReactionEnum
 
 EnName = String(50)
 ZhName = String(100)
-
-class ReactionEnum(PythonEnum):
-    LOVE = "love"
-    LIKE = "like"
-    DISLIKE = "dislike"
+Link = String(100)
 
 class CollectionDomain(Base):
     __tablename__ = 'collection'
     id = Column(Integer, primary_key=True)
-    zh_name = Column(ZhName)
-    en_name = Column(EnName)
-    link = Column(String(100))
+    name = Column(EnName)
+    link = Column(Link)
     detail = relationship("CollectionDetailDomain", back_populates="collection")
 
 class CollectionDetailDomain(Base):
@@ -30,7 +25,7 @@ class VillagerDomain(Base):
     __tablename__ = 'villager'
     id = Column(Integer, primary_key=True)
     name = Column(EnName)
-    zh_name = Column(ZhName)
+    link = Column(Link)
     icon_link = Column(String(255))
 
 class VillagerCollectionDomain(Base):
@@ -44,7 +39,6 @@ class BundleDomain(Base):
     __tablename__ = 'bundle'
     id = Column(Integer, primary_key=True)
     name = Column(EnName)
-    zh_name = Column(ZhName)
 
 class BundleCollectionDomain(Base):
     __tablename__ = 'bundle_collectin'
@@ -56,7 +50,6 @@ class RecipeDomain(Base):
     __tablename__ = 'recipe'
     id = Column(Integer, primary_key=True)
     name = Column(EnName)
-    zh_name = Column(ZhName)
 
 class RecipeCollectionDomain(Base):
     __tablename__ = 'recipe_collection'

@@ -1,56 +1,45 @@
 import scrapy
-import os
-from stardew_valley.items import CollectionDetailItem
+from stardew_valley.items import CollectionsItem
 from stardew_valley.dao.collection_dao import CollectionDao
-from stardew_valley.database import Database
+from stardew_valley.utils.defines import Utils
 
 class CollectionSpider(scrapy.Spider):
     name = "collection_spider"
     allowed_domains = ["stardewvalleywiki.com"]
-    host = "https://zh.stardewvalleywiki.com"
-    # start_urls = [f"{host}/%E6%94%B6%E9%9B%86%E5%93%81", f"https://www.stardewvalleywiki.com/Collections"]
-
-    def __init__(self, *args, **kwargs):
-        super(CollectionSpider, self).__init__(*args, **kwargs)
-        self.curr_path = os.getcwd()
-        self.resource_path = f'{self.curr_path}/stardew_valley/resources'
-        
 
     def start_requests(self):
-        downloaded_files = self._get_downloaded_htmls()
-        items = CollectionDao().get_collections()
-        result_items = [item for item in items if item['zh_name'] not in downloaded_files]
+        yield scrapy.Request("https://www.stardewvalleywiki.com/Collections", callback=self.parse)
 
-        if (len(result_items) == 0):
-            print("all collection is downloaded")
-            for file_name in downloaded_files[0:2]:
-                file_url = f"file://{self.resource_path}/{file_name}"
-                yield scrapy.Request(url=file_url, callback=self.parse)
-        else:
-            for item in result_items:
-                link = f"{self.host}{item['link']}"
-                yield scrapy.Request(url=link, callback=self.download_htmls, meta={"item": item})
-
-    # parse collection html
     def parse(self, response):
-        pass
+        tables = response.selector.xpath("//table[@class='wikitable']")
 
-    # download htmls
-    def download_htmls(self, response):
-        collection_item = response.meta["item"]
-        zh_name = collection_item["zh_name"]
-        self._save_html_to_file(zh_name, response.text)
+        items_list = []
+        for table in tables:
+            en_as = table.xpath(".//a")
+            items = self._parse_item(en_as)
+            items_list.extend(items)
 
-    # html files input/output
-    def _save_html_to_file(self, name, html):
-        directory = self.resource_path
-        if not os.path.exists(directory):
-            os.makedirs(directory)
+        extra_list = self._gen_extra_list()
+        items_list.extend(extra_list)
+        for item in items_list:
+            yield item
 
-        with open(f"{directory}/{name}", "w", encoding="utf-8") as f:
-            f.write(html)
-
-    def _get_downloaded_htmls(self):
-        directory = self.resource_path
-        file_names = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
-        return file_names
+    # <a href="/%E9%87%8E%E5%B1%B1%E8%91%B5" title="野山葵">野山葵</a>
+    def _parse_item(self, en_as):
+        items = []
+        for en_a in en_as:
+            item = CollectionsItem()
+            item["name"] = en_a.xpath("./text()").get()
+            item['link'] = en_a.xpath("@href").get()[1:]
+            items.append(item)
+        return items
+            
+    def _gen_extra_list(self):
+        names = ['Coffee', 'Pickles', 'Wine', 'Omni Geode', 'Piña Colada']
+        items = []
+        for name in names:
+            item  = CollectionsItem()
+            item["name"] = name
+            item['link'] = name
+            items.append(item)
+        return items

@@ -8,7 +8,10 @@
             "program": ".venv/bin/scrapy",
             "args": [
                 "crawl",
-                "collection_spider"
+                // "collection_spider"
+                // "collection_detail_spider"
+                // "villager_spider"
+                "villager_collection_spider"
             ],
             // "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",

@@ -5,18 +5,22 @@ from stardew_valley.items import CollectionsItem
 from stardew_valley.database import Database
 
 class CollectionDao:
-    def save_collection(self, item):
-        domain = CollectionDomain()
-        domain.zh_name = item["zh_name"]
-        domain.en_name = item["en_name"]
-        domain.link = item["link"]
+    def create_items(self, items):
+        db_domains = self.get_all()
+        for item in items:
+            name = item['name']
+            link = item['link']
+            found_domain = [db_domain for db_domain in db_domains if db_domain.name == name]
+            if found_domain:
+                continue
 
-        Database().create(domain)
+            domain = CollectionDomain()
+            domain.name = name
+            domain.link = link
+            Database().create(domain)
 
     def check_collections_exist(self):
-        session = self.Session()
         has_data = Database().query(CollectionDomain).first() is not None
-        session.close()
         return has_data
     
     def get_collections(self):
@@ -24,8 +28,13 @@ class CollectionDao:
         items = []
         for domain in domains:
             item = CollectionsItem()
-            item["zh_name"] = domain.zh_name
-            item["en_name"] = domain.en_name
+            item["name"] = domain.name
             item["link"] = domain.link
             items.append(item)
         return items
+
+    def get_all(self):
+        return Database().query(CollectionDomain).all()
+    
+    def get_by_en_name(self, name):
+        return Database().query(CollectionDomain).filter(CollectionDomain.name==name).first()

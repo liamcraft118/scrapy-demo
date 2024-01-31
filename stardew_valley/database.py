@@ -11,7 +11,7 @@ class Database:
     def __new__(cls):
         if not cls._instance:
             cls._instance = super(Database, cls).__new__(cls)
-            cls._instance.engine = create_engine(mysql_url)
+            cls._instance.engine = create_engine(mysql_url, pool_size=5, max_overflow=10)
             cls._instance.Session = sessionmaker(bind=cls._instance.engine)
         return cls._instance
 
@@ -30,4 +30,5 @@ class Database:
     def query(self, domain_class):
         session = self.Session()
         domains = session.query(domain_class)
+        session.close()
         return domains

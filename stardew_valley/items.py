@@ -12,17 +12,22 @@ class StardewValleyItem(scrapy.Item):
     pass
 
 class CollectionsItem(scrapy.Item):
-    en_name = scrapy.Field()
-    zh_name = scrapy.Field()
+    name = scrapy.Field()
     link = scrapy.Field()
 
 class CollectionDetailItem(scrapy.Item):
+    name = scrapy.Field()
     growth_time = scrapy.Field()
 
 class VilltagerItem(scrapy.Item):
     name = scrapy.Field()
-    zh_name = scrapy.Field()
+    link = scrapy.Field()
     icon_link = scrapy.Field()
+
+class VilltagerCollectionItem(scrapy.Item):
+    villager_name = scrapy.Field()
+    collection_name = scrapy.Field()
+    reaction = scrapy.Field()
 
 class BundleItem(scrapy.Item):
     name = scrapy.Field()

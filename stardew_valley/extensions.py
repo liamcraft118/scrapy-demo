@@ -12,5 +12,5 @@ class DatabaseExtension:
     def spider_opened(self, spider):
         pymysql.install_as_MySQLdb()
         database = Database()
-        database.remove_all_tables()
+        # database.remove_all_tables()
         database.init_database()
