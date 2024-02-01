@@ -31,8 +31,16 @@ class VilltagerCollectionItem(scrapy.Item):
 
 class BundleItem(scrapy.Item):
     name = scrapy.Field()
-    zh_name = scrapy.Field()
+
+class BundleCollectionItem(scrapy.Item):
+    bundle_name = scrapy.Field()
     collection_name = scrapy.Field()
-    
+
+class CookRecipeItem(scrapy.Item):
+    name = scrapy.Field()
+
+class CookRecipeCollectionItem(scrapy.Item):
+    cook_recipe_name = scrapy.Field()
+    collection_name = scrapy.Field()
 
     

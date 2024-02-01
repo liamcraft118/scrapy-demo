@@ -1,6 +1,9 @@
 from enum import Enum as PythonEnum
 import os
 
+class SpecColEnum(PythonEnum):
+    ANY_FISH = 'Any Fish'
+
 class ReactionEnum(PythonEnum):
     LOVE = "love"
     LIKE = "like"
@@ -10,7 +13,7 @@ class Utils():
     curr_path = os.getcwd()
     resource_path = f'{curr_path}/stardew_valley/resources/collections'
     villager_path = f'{curr_path}/stardew_valley/resources/villagers'
-    host = "https://www.stardewvalleywiki.com"
+    host = "https://stardewvalleywiki.com"
 
     @classmethod
     def get_downloaded_htmls(cls):
@@ -25,3 +28,31 @@ class Utils():
 
         with open(f"{path}/{name}", "w", encoding="utf-8") as f:
             f.write(html)
+    
+    @classmethod
+    def find_url(cls, name):
+        root = f"{cls.curr_path}/stardew_valley/resources"
+        path = f"{root}/{name}"
+
+        if os.path.exists(path):
+            return f"file://{path}"
+        else:
+            base_name = os.path.basename(name)
+            return f"{cls.host}/{base_name}"
+
+    @classmethod
+    def save_html(cls, name, html):
+        root = f"{cls.curr_path}/stardew_valley/resources"
+        path = f"{root}/{name}"
+        folder = os.path.dirname(path)
+
+        if os.path.exists(path):
+            return
+
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(html)
+
+        

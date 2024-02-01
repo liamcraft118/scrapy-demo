@@ -36,10 +36,20 @@ class CollectionSpider(scrapy.Spider):
             
     def _gen_extra_list(self):
         names = ['Coffee', 'Pickles', 'Wine', 'Omni Geode', 'Piña Colada']
+        name_1 = ['Wheat Flour', 'Sugar', 'Oil', 'Rice', 'Vinegar']
+        names.extend(name_1)
+        
         items = []
         for name in names:
             item  = CollectionsItem()
             item["name"] = name
             item['link'] = name
             items.append(item)
+            
+        # any fish
+        item = CollectionsItem()
+        item['name'] = 'Any Fish'
+        item['link'] = None
+        items.append(item)
+
         return items

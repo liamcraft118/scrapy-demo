@@ -11,7 +11,11 @@
                 // "collection_spider"
                 // "collection_detail_spider"
                 // "villager_spider"
-                "villager_collection_spider"
+                // "villager_collection_spider"
+                // "bundle_spider"
+                // "bundle_collection_spider"
+                // "cook_recipe_spider"
+                "cook_recipe_collection_spider"
             ],
             // "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",

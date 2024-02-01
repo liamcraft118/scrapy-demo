@@ -41,18 +41,18 @@ class BundleDomain(Base):
     name = Column(EnName)
 
 class BundleCollectionDomain(Base):
-    __tablename__ = 'bundle_collectin'
+    __tablename__ = 'bundle_collection'
     id = Column(Integer, primary_key=True)
     bundle_id = Column(Integer)
     collection_id = Column(Integer)
 
-class RecipeDomain(Base):
-    __tablename__ = 'recipe'
+class CookRecipeDomain(Base):
+    __tablename__ = 'cook_recipe'
     id = Column(Integer, primary_key=True)
     name = Column(EnName)
 
-class RecipeCollectionDomain(Base):
-    __tablename__ = 'recipe_collection'
+class CookRecipeCollectionDomain(Base):
+    __tablename__ = 'cook_recipe_collection'
     id = Column(Integer, primary_key=True)
-    recipe_id = Column(Integer)
+    cook_recipe_id = Column(Integer)
     collection_id = Column(Integer)
