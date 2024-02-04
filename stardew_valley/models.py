@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from stardew_valley.database import Base
-from stardew_valley.utils.defines import ReactionEnum
+from stardew_valley.utils.defines import ReactionEnum, CalendarType
 
 EnName = String(50)
 ZhName = String(100)
@@ -25,8 +25,7 @@ class VillagerDomain(Base):
     __tablename__ = 'villager'
     id = Column(Integer, primary_key=True)
     name = Column(EnName)
-    link = Column(Link)
-    icon_link = Column(String(255))
+    birthday = Column(Integer)
 
 class VillagerCollectionDomain(Base):
     __tablename__ = 'villager_collection'
@@ -56,3 +55,26 @@ class CookRecipeCollectionDomain(Base):
     id = Column(Integer, primary_key=True)
     cook_recipe_id = Column(Integer)
     collection_id = Column(Integer)
+
+class PlantableDomain(Base):
+    __tablename__ = 'plantable'
+    id = Column(Integer, primary_key=True)
+    name = Column(EnName)
+
+class SeasonDomain(Base):
+    __tablename__ = 'season'
+    id = Column(Integer, primary_key=True)
+    name = Column(EnName)
+
+class PlantableSeasionDomain(Base):
+    __tablename__ = 'plantable_season'
+    id = Column(Integer, primary_key=True)
+    plantable_id = Column(Integer)
+    season_id = Column(Integer)
+
+class CalendarDomain(Base):
+    __tablename__ = 'calendar'
+    id = Column(Integer, primary_key=True)
+    day = Column(Integer)
+    name = Column(EnName)
+    type = Column(Enum(CalendarType))

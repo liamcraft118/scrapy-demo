@@ -15,6 +15,9 @@ from stardew_valley.dao.bundle_dao import BundleDao
 from stardew_valley.dao.bundle_collection_dao import BundleCollectionDao
 from stardew_valley.dao.cook_recipe_dao import CookRecipeDao
 from stardew_valley.dao.cook_recipe_collection_dao import CookRecipeCollectionDao
+from stardew_valley.dao.plantable_dao import PlantableDao
+from stardew_valley.dao.season_dao import SeasonDao 
+from stardew_valley.dao.plantable_season_dao import PlantableSeasionDomain
 from stardew_valley import items as Item
 
 

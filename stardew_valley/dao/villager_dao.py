@@ -11,8 +11,7 @@ class VillagerDao:
 
         domain = VillagerDomain()
         domain.name = item["name"]
-        domain.link = item["link"]
-        domain.icon_link = item['icon_link']
+        domain.birthday = item["birthday"]
         Database().create(domain)
 
     def get_all(self):

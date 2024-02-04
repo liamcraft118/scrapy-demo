@@ -5,7 +5,6 @@
 
 import scrapy
 
-
 class StardewValleyItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
@@ -21,8 +20,7 @@ class CollectionDetailItem(scrapy.Item):
 
 class VilltagerItem(scrapy.Item):
     name = scrapy.Field()
-    link = scrapy.Field()
-    icon_link = scrapy.Field()
+    birthday = scrapy.Field()
 
 class VilltagerCollectionItem(scrapy.Item):
     villager_name = scrapy.Field()
@@ -43,4 +41,17 @@ class CookRecipeCollectionItem(scrapy.Item):
     cook_recipe_name = scrapy.Field()
     collection_name = scrapy.Field()
 
-    
+# class PlantableItem(scrapy.Item):
+#     name = scrapy.Field()
+
+# class SeasonItem(scrapy.Item):
+#     name = scrapy.Field()
+
+# class PlantableSeasionItem(scrapy.Field):
+#     plantable_name = scrapy.Field()
+#     season_name = scrapy.Field()
+
+# class CalendarItem(scrapy.Field):
+#     day = scrapy.Field()
+#     name = scrapy.Field()
+#     type = scrapy.Field()

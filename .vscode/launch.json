@@ -15,7 +15,9 @@
                 // "bundle_spider"
                 // "bundle_collection_spider"
                 // "cook_recipe_spider"
-                "cook_recipe_collection_spider"
+                // "cook_recipe_collection_spider"
+                // "calendar_spider"
+                "plantable_spider"
             ],
             // "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
@@ -27,6 +29,22 @@
                 "WaitOnNormalExit",
                 "RedirectOutput"
             ]
+        },
+        {
+            "name": "Uvicorn: main",
+            "type": "python",
+            "request": "launch",
+            "program": ".venv/bin/uvicorn",
+            "args": [
+                "stardew_valley.main:app",
+                "--reload",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }

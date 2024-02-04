@@ -1,6 +1,14 @@
 from enum import Enum as PythonEnum
 import os
 
+class CalendarType(PythonEnum):
+    BIRTHDAY = 'Birthdays'
+    FESTIVAL = 'Festival'
+    EVENT = 'Event'
+
+class SpecSeasonEnum(PythonEnum):
+    Other = 'Other'
+
 class SpecColEnum(PythonEnum):
     ANY_FISH = 'Any Fish'
 

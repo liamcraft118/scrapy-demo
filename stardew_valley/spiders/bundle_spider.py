@@ -1,6 +1,5 @@
 import scrapy
 from stardew_valley.items import BundleItem
-from stardew_valley.dao.bundle_dao import BundleDao
 
 class BundleSpider(scrapy.Spider):
     name = "bundle_spider"
