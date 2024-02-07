@@ -24,7 +24,7 @@ class SimpleSpider(scrapy.Spider):
 
     def _inner_parse(self, response):
         Utils.save_html(self.url_path, response.text)
-        self.parse(response)
+        yield from self.parse(response)
 
     def parse(self, response):
         raise NotImplementedError("Subclasses must implement this method")

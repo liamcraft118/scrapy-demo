@@ -46,7 +46,7 @@ class CanlendarSpider(SimpleSpider):
                 item = CalendarDomain()
                 item.day = value + offset * 28
                 item.name = tr.xpath("./td[2]/p/a/text()").get()
-                item.type = CalendarType.FESTIVAL.value
+                item.type = CalendarType.FESTIVAL
                 items.append(item)
         return items
 
@@ -61,7 +61,7 @@ class CanlendarSpider(SimpleSpider):
                 item.day = value + offset * 28
                 name = tr.xpath(".//td[2]//text()").extract()
                 item.name = ''.join(name[:-1])
-                item.type = CalendarType.FESTIVAL.value
+                item.type = CalendarType.EVENT
                 items.append(item)
         return items
 
@@ -76,7 +76,7 @@ class CanlendarSpider(SimpleSpider):
                 item.day = value + offset * 28
                 name = tr.xpath("./td[2]/a/text()").get()
                 item.name = name
-                item.type = CalendarType.FESTIVAL.value
+                item.type = CalendarType.BIRTHDAY
                 items.append(item)
         return items
 

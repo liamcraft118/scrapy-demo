@@ -1,3 +1,4 @@
+import json
 from typing import Union
 from fastapi import FastAPI
 from stardew_valley.database import Database
@@ -16,7 +17,18 @@ app.add_event_handler("startup", on_startup)
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    text = { "applinks": { "apps": [],
+    "details": [
+      {
+        "appID": "Naver Cloud Corp..com.nbpcorp.ncp.NcpWorkbox.dev",
+        "paths": ["/"]
+      }
+    ]
+  }
+}
+    return json.dumps(text)
+    
+
 
 
 @app.get("/items/{item_id}")
@@ -34,3 +46,11 @@ def find_all_villagers():
 @app.get("/plantableCollection")
 def find_plantable_collection():
     pass
+
+@app.get("/findCalendar")
+def find_calendar():
+    return StardewValleyService().find_calendar()
+
+@app.get("/findPlantable")
+def find_calendar():
+    return StardewValleyService().find_plantable()

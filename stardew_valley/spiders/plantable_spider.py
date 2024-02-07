@@ -16,12 +16,15 @@ class PlantableSpider(SimpleSpider):
 
         domains = []
         for name in names:
+            if name == "Coffee Beans":
+                name = "Coffee Bean"
             domain = PlantableDomain()
             domain.name = name
             domains.append(domain)
 
-        # PlantableSpider.database.drop(PlantableDomain)
-        # PlantableSpider.database.add(domains)
+        PlantableSpider.database.drop(PlantableDomain)
+        PlantableSpider.database.add(domains)
+        return names
 
     def _scrape_season(self, selector):
         names = selector.xpath("(//table)[last()]//tr[position() > 1]/th/text()").extract()
@@ -32,8 +35,8 @@ class PlantableSpider(SimpleSpider):
             domain.name = name
             domains.append(domain)
 
-        # PlantableSpider.database.drop(SeasonDomain)
-        # PlantableSpider.database.add(domains)
+        PlantableSpider.database.drop(SeasonDomain)
+        PlantableSpider.database.add(domains)
 
     def _scrape_plantable_season(self, selector):
         trs = selector.xpath("(//table)[last()]//tr[position() > 1]")

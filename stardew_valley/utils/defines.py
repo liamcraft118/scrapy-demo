@@ -2,9 +2,9 @@ from enum import Enum as PythonEnum
 import os
 
 class CalendarType(PythonEnum):
-    BIRTHDAY = 'Birthdays'
-    FESTIVAL = 'Festival'
-    EVENT = 'Event'
+    BIRTHDAY = 'birthday'
+    FESTIVAL = 'festival'
+    EVENT = 'event'
 
 class SpecSeasonEnum(PythonEnum):
     Other = 'Other'

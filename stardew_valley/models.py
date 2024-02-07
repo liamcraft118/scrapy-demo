@@ -78,3 +78,9 @@ class CalendarDomain(Base):
     day = Column(Integer)
     name = Column(EnName)
     type = Column(Enum(CalendarType))
+
+class PlantableDetailDomain(Base):
+    __tablename__ = 'plantable_detail'
+    id = Column(Integer, primary_key=True)
+    name = Column(EnName)
+    growth_time = Column(String(50))

@@ -30,25 +30,25 @@ class Database:
         session.commit()
         session.close()
 
-    def query(self, domain_class):
-        session = self.Session()
-        domains = session.query(domain_class)
-        session.close()
-        return domains
-    
     def add(self, domains):
         session = self.Session()
         for domain in domains:
             session.add(domain)
         session.commit()
+        session.close()
 
     def delete(self, item):
         session = self.Session()
         session.delete(item)
         session.commit()
+        session.close()
 
     def get_all(self, model):
-        return self.session.query(model).all()
+        session = self.Session()
+        results = session.query(model).all()
+        session.close()
+        return results
+
 
     def drop(self, domain_class):
         domain_class.__table__.drop(self.engine)

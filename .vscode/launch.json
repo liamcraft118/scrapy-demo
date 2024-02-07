@@ -17,7 +17,8 @@
                 // "cook_recipe_spider"
                 // "cook_recipe_collection_spider"
                 // "calendar_spider"
-                "plantable_spider"
+                // "plantable_spider"
+                "plantable_detail_spider"
             ],
             // "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",

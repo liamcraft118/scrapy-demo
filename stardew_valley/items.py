@@ -40,18 +40,3 @@ class CookRecipeItem(scrapy.Item):
 class CookRecipeCollectionItem(scrapy.Item):
     cook_recipe_name = scrapy.Field()
     collection_name = scrapy.Field()
-
-# class PlantableItem(scrapy.Item):
-#     name = scrapy.Field()
-
-# class SeasonItem(scrapy.Item):
-#     name = scrapy.Field()
-
-# class PlantableSeasionItem(scrapy.Field):
-#     plantable_name = scrapy.Field()
-#     season_name = scrapy.Field()
-
-# class CalendarItem(scrapy.Field):
-#     day = scrapy.Field()
-#     name = scrapy.Field()
-#     type = scrapy.Field()
