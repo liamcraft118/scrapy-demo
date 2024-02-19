@@ -1,7 +1,7 @@
 # dao/user_dao.py
 
 from stardew_valley.models import CollectionDomain
-from stardew_valley.items import CollectionsItem
+from stardew_valley.items import CollectionItem
 from stardew_valley.database import Database
 
 class CollectionDao:
@@ -27,7 +27,7 @@ class CollectionDao:
         domains = Database().query(CollectionDomain)
         items = []
         for domain in domains:
-            item = CollectionsItem()
+            item = CollectionItem()
             item["name"] = domain.name
             item["link"] = domain.link
             items.append(item)

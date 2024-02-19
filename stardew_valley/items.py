@@ -40,3 +40,9 @@ class CookRecipeItem(scrapy.Item):
 class CookRecipeCollectionItem(scrapy.Item):
     cook_recipe_name = scrapy.Field()
     collection_name = scrapy.Field()
+
+class CollectionItem(scrapy.Item):
+    name = scrapy.Field()
+    link = scrapy.Field()
+    icon_link = scrapy.Field()
+    type = scrapy.Field()

@@ -1,5 +1,5 @@
 import scrapy
-from stardew_valley.items import CollectionsItem
+from stardew_valley.items import CollectionItem
 from stardew_valley.dao.collection_dao import CollectionDao
 from stardew_valley.utils.defines import Utils
 
@@ -28,7 +28,7 @@ class CollectionSpider(scrapy.Spider):
     def _parse_item(self, en_as):
         items = []
         for en_a in en_as:
-            item = CollectionsItem()
+            item = CollectionItem()
             item["name"] = en_a.xpath("./text()").get()
             item['link'] = en_a.xpath("@href").get()[1:]
             items.append(item)
@@ -41,13 +41,13 @@ class CollectionSpider(scrapy.Spider):
         
         items = []
         for name in names:
-            item  = CollectionsItem()
+            item  = CollectionItem()
             item["name"] = name
             item['link'] = name
             items.append(item)
             
         # any fish
-        item = CollectionsItem()
+        item = CollectionItem()
         item['name'] = 'Any Fish'
         item['link'] = None
         items.append(item)

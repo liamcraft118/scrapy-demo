@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from stardew_valley.utils.defines import CalendarType
+from stardew_valley.utils.defines import CalendarType, CollectionType
 
 class StardewValleyDTO(BaseModel):
     name: str
@@ -12,3 +12,9 @@ class CalendarDTO(BaseModel):
 class PlantableDetailDTO(BaseModel):
     name: str
     growth_time: str
+
+class CollectionDTO(BaseModel):
+    name: str
+    link: str
+    icon_link: str
+    type: CollectionType

@@ -33,7 +33,7 @@ class DatabasePipeline:
         self.cook_recipe_collection_items = []
 
     def process_item(self, item ,spider):
-        if isinstance(item, Item.CollectionsItem):
+        if isinstance(item, Item.CollectionItem):
             self.collection_items.append(item)
         if isinstance(item, Item.CollectionDetailItem):
             self.collection_detail_items.append(item)

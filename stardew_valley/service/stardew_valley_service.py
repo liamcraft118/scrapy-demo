@@ -1,7 +1,7 @@
 from stardew_valley.dao.collection_dao import CollectionDao
-from stardew_valley.dto.stardew_valley_dto import CalendarDTO, PlantableDetailDTO, StardewValleyDTO
+from stardew_valley.dto.stardew_valley_dto import CalendarDTO, CollectionDTO, PlantableDetailDTO, StardewValleyDTO
 from stardew_valley.database import Database
-from stardew_valley.models import CalendarDomain, PlantableDetailDomain
+from stardew_valley.models import CalendarDomain, CollectionDomain, PlantableDetailDomain
 
 class StardewValleyService:
     def findAllCollections(self):
@@ -18,4 +18,9 @@ class StardewValleyService:
     def find_plantable(self):
         domains = Database().get_all(PlantableDetailDomain)
         dtos = list(map(lambda x: PlantableDetailDTO.model_validate(x.__dict__), domains))
+        return dtos
+
+    def find_collections(self):
+        domains = Database().get_all(CollectionDomain)
+        dtos = list(map(lambda x: CollectionDTO.model_validate(x.__dict__), domains))
         return dtos

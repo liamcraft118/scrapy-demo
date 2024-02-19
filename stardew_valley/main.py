@@ -54,3 +54,7 @@ def find_calendar():
 @app.get("/findPlantable")
 def find_calendar():
     return StardewValleyService().find_plantable()
+
+@app.get("/find_collections")
+def find_collections():
+    return StardewValleyService().find_collections()

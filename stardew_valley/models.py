@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from stardew_valley.database import Base
-from stardew_valley.utils.defines import ReactionEnum, CalendarType
+from stardew_valley.utils.defines import ReactionEnum, CalendarType, CollectionType
 
 EnName = String(50)
 ZhName = String(100)
@@ -13,13 +13,13 @@ class CollectionDomain(Base):
     id = Column(Integer, primary_key=True)
     name = Column(EnName)
     link = Column(Link)
-    detail = relationship("CollectionDetailDomain", back_populates="collection")
+    icon_link = Column(Link)
+    type = Column(Enum(CollectionType))
 
 class CollectionDetailDomain(Base):
     __tablename__ = 'collection_detail'
-    id = Column(Integer, ForeignKey('collection.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
     growth_time = Column(Integer)
-    collection = relationship("CollectionDomain", back_populates="detail")
 
 class VillagerDomain(Base):
     __tablename__ = 'villager'

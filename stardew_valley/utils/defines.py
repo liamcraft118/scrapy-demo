@@ -17,6 +17,14 @@ class ReactionEnum(PythonEnum):
     LIKE = "like"
     DISLIKE = "dislike"
 
+class CollectionType(PythonEnum):
+    SHIPPED_ITEM = 'shipped_item'
+    FISH = 'fish'
+    ARTIFACT = 'artifact'
+    MINERAL = 'mineral'
+    COOKING = 'cooking'
+
+
 class Utils():
     curr_path = os.getcwd()
     resource_path = f'{curr_path}/stardew_valley/resources/collections'

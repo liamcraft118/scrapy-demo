@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 import pymysql
 
 Base = declarative_base()
@@ -27,6 +27,12 @@ class Database:
     def create(self, domain):
         session = self.Session()
         session.add(domain)
+        session.commit()
+        session.close()
+
+    def update(self, model: DeclarativeMeta, filters: dict, **kwargs):
+        session = self.Session()
+        session.query(model).filter_by(**filters).update(kwargs)
         session.commit()
         session.close()
 
@@ -57,5 +63,14 @@ class Database:
     def get_id_by_name(self, domain_class, name):
         session = self.Session()
         result = session.query(domain_class).filter(domain_class.name==name).first().id
+        session.close()
+        return result
+
+    def get_first(self, model: DeclarativeMeta, filters: dict):
+        return self.get(model, filters).first()
+
+    def get(self, model: DeclarativeMeta, filters: dict):
+        session = self.Session()
+        result = session.query(model).filter_by(**filters)
         session.close()
         return result
